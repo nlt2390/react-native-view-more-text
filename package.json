@@ -1,12 +1,16 @@
 {
   "name": "react-native-view-more-text",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Expand/Collapse long text.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "homepage": "https://github.com/nlt2390/react-native-view-more-text",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nlt2390/react-native-view-more-text"
+  },
   "keywords": [
     "react",
     "native",
@@ -15,5 +19,5 @@
     "text"
   ],
   "author": "nlt2390",
-  "license": "ISC"
+  "license": "MIT"
 }
