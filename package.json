@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/nlt2390/react-native-view-more-text",
   "keywords": [
-    "[\"react",
-    "native\"",
-    "\"view",
+    "react",
+    "native",
+    "view",
     "more",
-    "text\"]"
+    "text"
   ],
   "author": "nlt2390",
   "license": "ISC"
