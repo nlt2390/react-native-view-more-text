@@ -4,8 +4,8 @@ A super lightweight plugin to expand/collapse text in React-Native. Truncated te
 
 Working on IOS/Android
 
-![ios](https://github.com/nlt2390/react-native-view-more-text/blob/master/ios.gif)
-![android](https://github.com/nlt2390/react-native-view-more-text/blob/master/android.gif)
+![ios](https://raw.githubusercontent.com/nlt2390/react-native-view-more-text/master/ios.gif)
+![android](https://raw.githubusercontent.com/nlt2390/react-native-view-more-text/master/android.gif)
 
 ### Installation
 
