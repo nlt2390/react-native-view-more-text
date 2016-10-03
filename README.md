@@ -25,14 +25,14 @@ npm install --save react-native-view-more-text
 	
 	let Example = React.createClass({
 		renderViewMore(onPress){
-		  return(
-		    <Text onPress={onPress}>View more</Text>
-    	)
+			return(
+				<Text onPress={onPress}>View more</Text>
+			)
 		},
 		renderViewLess(onPress){
-  	  return(
-  		    <Text onPress={onPress}>View less</Text>
-		  )
+			return(
+				<Text onPress={onPress}>View less</Text>
+			)
 		},
 		render(){
 			return(
