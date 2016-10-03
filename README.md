@@ -14,7 +14,6 @@ npm install --save react-native-view-more-text
 ### Usage
 
 - **numberOfLines**(required): Number of lines to be displayed.
-- **truncatedHeight**(required): If the text exceeds this height, truncation will be triggered.
 - **renderViewMore**: Render view-more component 
 - **renderViewLess**: Render view-less component 
 
@@ -36,7 +35,6 @@ npm install --save react-native-view-more-text
 			return(
 				<ViewMoreText
 			    numberOfLines={3}
-			    truncatedHeight={50}
 			    renderViewMore={this.renderViewMore}
 			    renderViewLess={this.renderViewLess}>
 			    <Text>
