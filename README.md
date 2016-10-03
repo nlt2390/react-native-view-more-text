@@ -4,6 +4,10 @@ A super lightweight plugin to expand/collapse text in React-Native. Truncated te
 
 Working on IOS/Android
 
+|   |   |
+|---|---|
+|![](react-native-view-more-text/ios.gif)|![](react-native-view-more-text/android.gif)|
+
 ### Installation
 
 ```
@@ -24,12 +28,12 @@ npm install --save react-native-view-more-text
 		renderViewMore(onPress){
 		  return(
 		    <Text onPress={onPress}>View more</Text>
-    	          )
+    	)
 		},
 		renderViewLess(onPress){
-	    	  return(
-      		    <Text onPress={onPress}>View less</Text>
-    		  )
+  	  return(
+  		    <Text onPress={onPress}>View less</Text>
+		  )
 		},
 		render(){
 			return(
