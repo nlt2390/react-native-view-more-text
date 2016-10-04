@@ -116,9 +116,11 @@ export default ViewMoreText = React.createClass({
           {this.props.children}
         </Text>
         {this.renderFooter()}
-
         
-        <Text style={{opacity: 0}}>{this.state.numberOfLines}</Text>
+        {
+          this.state.numberOfLines &&
+          <View style={{width: 1, height: 1}}></View>
+        }
 
       </View>
     )
