@@ -9,11 +9,12 @@ export default ViewMoreText = React.createClass({
   },
   isTruncated: false,
   originalHeight: 0,
+  shouldShowMore: false, 
+  contentHeight: 0,
 
   getInitialState(){
     this.resetData();
     return {
-      shouldShowMore: false,
       numberOfLines: null,
       opacity: 0
     }
@@ -22,6 +23,16 @@ export default ViewMoreText = React.createClass({
   resetData(){
     this.isTruncated = false;
     this.originalHeight = 0;
+    this.shouldShowMore = false;
+  },
+
+  componentWillReceiveProps(){
+    this.resetData();
+
+    this.setState({
+      numberOfLines: null,
+      opacity: 0
+    })
   },
 
   onLayout(event){
@@ -41,6 +52,7 @@ export default ViewMoreText = React.createClass({
   setOriginalHeight(height){
     if(this.originalHeight === 0){
       this.originalHeight = height;
+
       this.setState({
         numberOfLines: this.props.numberOfLines
       })
@@ -49,10 +61,7 @@ export default ViewMoreText = React.createClass({
 
   checkTextTruncated(height){
     if(height < this.originalHeight){
-      this.setState({
-        shouldShowMore: true,
-        opacity: 1
-      })
+      this.shouldShowMore = true;
     }
   },
 
@@ -86,11 +95,10 @@ export default ViewMoreText = React.createClass({
 
   renderFooter(){
     let {
-      shouldShowMore,
       numberOfLines
     } = this.state;
 
-    if (shouldShowMore === true){
+    if (this.shouldShowMore === true){
       if(numberOfLines > 0) {
         return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore);
       } else {
@@ -100,14 +108,18 @@ export default ViewMoreText = React.createClass({
   },
 
   render(){
+
     return (
       <View onLayout={this.onLayout} style={{opacity: this.state.opacity}}>
         <Text
           numberOfLines={this.state.numberOfLines}>
           {this.props.children}
         </Text>
-
         {this.renderFooter()}
+
+        
+        <Text style={{opacity: 0}}>{this.state.numberOfLines}</Text>
+
       </View>
     )
   }
