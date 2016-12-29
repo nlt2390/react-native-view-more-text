@@ -1,16 +1,21 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
+const emptyFunc = ()=>{};
+
 export default ViewMoreText = React.createClass({
   propTypes: {
     renderViewMore: React.PropTypes.func,
     renderViewLess: React.PropTypes.func,
+    afterCollapse: React.PropTypes.func,
+    afterExpand: React.PropTypes.func,
     numberOfLines: React.PropTypes.number.isRequired
   },
   isTruncated: false,
   originalHeight: 0,
   shouldShowMore: false, 
   contentHeight: 0,
+  isInit: false,
 
   getInitialState(){
     this.resetData();
@@ -20,10 +25,19 @@ export default ViewMoreText = React.createClass({
     }
   },
 
+  componentDidUpdate(){
+    if(this.state.numberOfLines === null){
+      (this.props.afterExpand || emptyFunc)();
+    } else {
+      (this.props.afterCollapse || emptyFunc)();
+    }
+  },
+
   resetData(){
     this.isTruncated = false;
     this.originalHeight = 0;
     this.shouldShowMore = false;
+    this.isInit = false;
   },
 
   componentWillReceiveProps(){
@@ -116,7 +130,7 @@ export default ViewMoreText = React.createClass({
           {this.props.children}
         </Text>
         {this.renderFooter()}
-        
+
         {
           this.state.numberOfLines &&
           <View style={{width: 1, height: 1}}></View>

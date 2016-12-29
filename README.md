@@ -19,6 +19,8 @@ npm install --save react-native-view-more-text
 - **numberOfLines**(required): Number of lines to be displayed.
 - **renderViewMore**: Render view-more component 
 - **renderViewLess**: Render view-less component 
+- **afterCollapse**: Callback after collapsing
+- **afterExpand**: Callback after expanding
 
 ```javascript
 	import ViewMoreText from 'react-native-view-more-text';
