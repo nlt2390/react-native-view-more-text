@@ -126,6 +126,7 @@ export default ViewMoreText = React.createClass({
     return (
       <View onLayout={this.onLayout} style={{opacity: this.state.opacity}}>
         <Text
+          style={this.props.style}
           numberOfLines={this.state.numberOfLines}>
           {this.props.children}
         </Text>
