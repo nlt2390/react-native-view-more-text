@@ -1,144 +1,192 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
-const emptyFunc = ()=>{};
-
-export default ViewMoreText = React.createClass({
-  propTypes: {
-    renderViewMore: React.PropTypes.func,
-    renderViewLess: React.PropTypes.func,
-    afterCollapse: React.PropTypes.func,
-    afterExpand: React.PropTypes.func,
-    numberOfLines: React.PropTypes.number.isRequired
+const styles = StyleSheet.create({
+  viewMoreTouchableContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  isTruncated: false,
-  originalHeight: 0,
-  shouldShowMore: false, 
-  contentHeight: 0,
-  isInit: false,
+  viewMoreText: { maxWidth: '90%' },
+});
 
-  getInitialState(){
-    this.resetData();
-    return {
+const emptyFunc = () => {};
+
+export default class ViewMoreText extends React.Component {
+  static propTypes = {
+    style: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.array,
+      PropTypes.object,
+    ]),
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
+    renderViewMore: PropTypes.func,
+    renderViewLess: PropTypes.func,
+    afterCollapse: PropTypes.func,
+    afterExpand: PropTypes.func,
+    numberOfLines: PropTypes.number.isRequired,
+  }
+
+  static defaultProps = {
+    style: {},
+    children: undefined,
+    renderViewMore: emptyFunc,
+    renderViewLess: emptyFunc,
+    afterCollapse: emptyFunc,
+    afterExpand: emptyFunc,
+    numberOfLines: null,
+  }
+
+  isTruncated = false
+  originalHeight = 0
+  shouldShowMore = false
+  contentHeight = 0
+  isInit = false
+
+  constructor(props) {
+    super(props);
+    this.state = {
       numberOfLines: null,
-      opacity: 0
-    }
-  },
+      opacity: 0,
+    };
+  }
 
-  componentDidUpdate(){
-    if(this.state.numberOfLines === null){
+  componentDidUpdate() {
+    if (this.state.numberOfLines === null) {
       (this.props.afterExpand || emptyFunc)();
     } else {
       (this.props.afterCollapse || emptyFunc)();
     }
-  },
+  }
 
-  resetData(){
+  resetData() {
     this.isTruncated = false;
     this.originalHeight = 0;
     this.shouldShowMore = false;
     this.isInit = false;
-  },
+  }
 
-  componentWillReceiveProps(){
+  componentWillReceiveProps() {
     this.resetData();
 
     this.setState({
-      numberOfLines: null,
-      opacity: 0
-    })
-  },
+      numberOfLines: 0,
+      opacity: 0,
+    });
+  }
 
-  onLayout(event){
-    const {x, y, width, height} = event.nativeEvent.layout;
-
-    if(height === 0 || this.state.opacity === 1) return false;
-
+  onLayout(event) {
+    const { height } = event.nativeEvent.layout;
+    if (height === 0 || (this.state && this.state.opacity === 1)) return false;
     this.setOriginalHeight(height);
     this.checkTextTruncated(height);
-    if(this.state.numberOfLines === this.props.numberOfLines){
+    if (this.state.numberOfLines === this.props.numberOfLines) {
       this.setState({
-        opacity: 1
-      })
+        opacity: 1,
+      });
     }
-  },
-  
-  setOriginalHeight(height){
-    if(this.originalHeight === 0){
+    return true;
+  }
+
+  setOriginalHeight(height) {
+    if (this.originalHeight === 0) {
       this.originalHeight = height;
 
       this.setState({
-        numberOfLines: this.props.numberOfLines
-      })
+        numberOfLines: this.props.numberOfLines,
+      });
     }
-  },
-
-  checkTextTruncated(height){
-    if(height < this.originalHeight){
-      this.shouldShowMore = true;
-    }
-  },
-
-  onPressMore(){
-    this.setState({
-      numberOfLines: null
-    });
-  },
-
-  onPressLess(){
-    this.setState({
-      numberOfLines: this.props.numberOfLines
-    })
-  },
-
-  renderViewMore(){
-    return (
-      <Text onPress={this.onPressMore}>
-        View More
-      </Text>
-    )
-  },
-  
-  renderViewLess(){
-    return (
-      <Text onPress={this.onPressLess}>
-        View Less
-      </Text>
-    )
-  },
-
-  renderFooter(){
-    let {
-      numberOfLines
-    } = this.state;
-
-    if (this.shouldShowMore === true){
-      if(numberOfLines > 0) {
-        return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore);
-      } else {
-        return (this.props.renderViewLess || this.renderViewLess)(this.onPressLess);
-      }
-    }
-  },
-
-  render(){
-
-    return (
-      <View onLayout={this.onLayout} style={{opacity: this.state.opacity}}>
-        <Text
-          numberOfLines={this.state.numberOfLines}>
-          {this.props.children}
-        </Text>
-        {this.renderFooter()}
-
-        {
-          this.state.numberOfLines &&
-          <View style={{width: 1, height: 1}}></View>
-        }
-
-      </View>
-    )
   }
 
-})
+  checkTextTruncated(height) {
+    if (height < this.originalHeight) {
+      this.shouldShowMore = true;
+    }
+  }
 
+  onPressMore() {
+    this.setState({
+      numberOfLines: 0,
+    });
+  }
+
+  onPressLess() {
+    this.setState({
+      numberOfLines: this.props.numberOfLines,
+    });
+  }
+
+  renderViewMore(onPress) {
+    return (
+      <Text onPress={onPress}>
+        View More
+      </Text>
+    );
+  }
+
+  renderViewLess(onPress) {
+    return (
+      <Text onPress={onPress}>
+        View Less
+      </Text>
+    );
+  }
+
+  renderFooter() {
+    const numberOfLines = this.state.numberOfLines;
+
+    if (numberOfLines > 0) {
+      return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore.bind(this));
+    }
+    return (this.props.renderViewLess || this.renderViewLess)(this.onPressLess.bind(this));
+  }
+
+  renderContent() {
+    const numberOfLines = this.state.numberOfLines;
+
+    const onTextPress = numberOfLines > 0 ? this.onPressMore.bind(this) : this.onPressLess.bind(this);
+
+    if (this.shouldShowMore) {
+      return (
+        <TouchableOpacity
+          style={styles.viewMoreTouchableContainer}
+          onPress={onTextPress}
+        >
+          <Text
+            style={styles.viewMoreText}
+            numberOfLines={this.state.numberOfLines}
+          >
+            {this.props.children}
+          </Text>
+          <View>
+            {this.renderFooter()}
+          </View>
+        </TouchableOpacity>
+      );
+    }
+
+    return (
+      <Text
+        numberOfLines={this.state.numberOfLines}
+      >
+        {this.props.children}
+      </Text>
+    );
+  }
+
+  render() {
+    return (
+      <View
+        onLayout={this.onLayout.bind(this)}
+        style={this.props.style}
+      >
+        { this.renderContent() }
+
+      </View>
+    );
+  }
+}
