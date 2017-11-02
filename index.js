@@ -81,10 +81,7 @@ export default class ViewMoreText extends React.Component {
 
   onLayout(event) {
     const { height } = event.nativeEvent.layout;
-
     if (height === 0 || (this.state && this.state.opacity === 1)) return false;
-
-    console.log(this.setOriginalHeight);
     this.setOriginalHeight(height);
     this.checkTextTruncated(height);
     if (this.state.numberOfLines === this.props.numberOfLines) {
