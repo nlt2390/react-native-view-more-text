@@ -74,7 +74,7 @@ export default class ViewMoreText extends React.Component {
     this.resetData();
 
     this.setState({
-      numberOfLines: null,
+      numberOfLines: 0,
       opacity: 0,
     });
   }
@@ -82,8 +82,9 @@ export default class ViewMoreText extends React.Component {
   onLayout(event) {
     const { height } = event.nativeEvent.layout;
 
-    if (height === 0 || !this.state || this.state.opacity === 1) return false;
+    if (height === 0 || (this.state && this.state.opacity === 1)) return false;
 
+    console.log(this.setOriginalHeight);
     this.setOriginalHeight(height);
     this.checkTextTruncated(height);
     if (this.state.numberOfLines === this.props.numberOfLines) {
@@ -112,7 +113,7 @@ export default class ViewMoreText extends React.Component {
 
   onPressMore() {
     this.setState({
-      numberOfLines: null,
+      numberOfLines: 0,
     });
   }
 
@@ -122,17 +123,17 @@ export default class ViewMoreText extends React.Component {
     });
   }
 
-  renderViewMore() {
+  renderViewMore(onPress) {
     return (
-      <Text onPress={this.onPressMore}>
+      <Text onPress={onPress}>
         View More
       </Text>
     );
   }
 
-  renderViewLess() {
+  renderViewLess(onPress) {
     return (
-      <Text onPress={this.onPressLess}>
+      <Text onPress={onPress}>
         View Less
       </Text>
     );
@@ -142,20 +143,19 @@ export default class ViewMoreText extends React.Component {
     const numberOfLines = this.state.numberOfLines;
 
     if (numberOfLines > 0) {
-      return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore);
+      return (this.props.renderViewMore || this.renderViewMore)(this.onPressMore.bind(this));
     }
-    return (this.props.renderViewLess || this.renderViewLess)(this.onPressLess);
+    return (this.props.renderViewLess || this.renderViewLess)(this.onPressLess.bind(this));
   }
 
   renderContent() {
     const numberOfLines = this.state.numberOfLines;
 
-    const onTextPress = numberOfLines > 0 ? this.onPressMore : this.onPressLess;
+    const onTextPress = numberOfLines > 0 ? this.onPressMore.bind(this) : this.onPressLess.bind(this);
 
     if (this.shouldShowMore) {
       return (
         <TouchableOpacity
-          onLayout={this.onLayout}
           style={styles.viewMoreTouchableContainer}
           onPress={onTextPress}
         >
@@ -184,7 +184,7 @@ export default class ViewMoreText extends React.Component {
   render() {
     return (
       <View
-        onLayout={this.onLayout}
+        onLayout={this.onLayout.bind(this)}
         style={this.props.style}
       >
         { this.renderContent() }
