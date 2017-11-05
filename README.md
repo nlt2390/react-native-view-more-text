@@ -23,31 +23,31 @@ npm install --save react-native-view-more-text
 - **afterExpand**: Callback after expanding
 
 ```javascript
-	import ViewMoreText from 'react-native-view-more-text';
-	
-	let Example = React.createClass({
-		renderViewMore(onPress){
-			return(
-				<Text onPress={onPress}>View more</Text>
-			)
-		},
-		renderViewLess(onPress){
-			return(
-				<Text onPress={onPress}>View less</Text>
-			)
-		},
-		render(){
-			return(
-				<ViewMoreText
-			    numberOfLines={3}
-			    renderViewMore={this.renderViewMore}
-			    renderViewLess={this.renderViewLess}>
-			    <Text>
-			      Lorem ipsum dolor sit amet, in quo dolorum ponderum, nam veri molestie constituto eu. Eum enim tantas sadipscing ne, ut omnes malorum nostrum cum. Errem populo qui ne, ea ipsum antiopam definitionem eos.
-			    </Text>
-			  </ViewMoreText>
-			)
-		}
-	})
+  import ViewMoreText from 'react-native-view-more-text';
+  
+  let Example = React.createClass({
+    renderViewMore(onPress){
+      return(
+        <Text onPress={onPress}>View more</Text>
+      )
+    },
+    renderViewLess(onPress){
+      return(
+        <Text onPress={onPress}>View less</Text>
+      )
+    },
+    render(){
+      return(
+        <ViewMoreText
+          numberOfLines={3}
+          renderViewMore={this.renderViewMore}
+          renderViewLess={this.renderViewLess}>
+          <Text>
+            Lorem ipsum dolor sit amet, in quo dolorum ponderum, nam veri molestie constituto eu. Eum enim tantas sadipscing ne, ut omnes malorum nostrum cum. Errem populo qui ne, ea ipsum antiopam definitionem eos.
+          </Text>
+        </ViewMoreText>
+      )
+    }
+  })
 
 ```
