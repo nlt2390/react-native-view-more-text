@@ -114,6 +114,7 @@ class ViewMoreText extends React.Component {
     return (
       <View onLayout={this.onLayout} style={{ opacity: this.state.opacity }}>
         <Text
+          style={this.props.textStyle}
           numberOfLines={this.state.numberOfLines}
         >
           {this.props.children}
@@ -136,11 +137,13 @@ ViewMoreText.propTypes = {
   afterCollapse: PropTypes.func,
   afterExpand: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
+  textStyle: Text.propTypes.style,
 };
 
 ViewMoreText.defaultProps = {
   afterCollapse: () => {},
   afterExpand: () => {},
+  textStyle: {}
 };
 
 export default ViewMoreText;
