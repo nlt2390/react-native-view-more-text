@@ -22,6 +22,9 @@ npm install --save react-native-view-more-text
 - **afterCollapse**: Callback after collapsing
 - **afterExpand**: Callback after expanding
 
+- **textStyle**: Style is passed to <Text> inside <ViewMoreText>
+(Refer to this PR #8)
+
 ```javascript
   import ViewMoreText from 'react-native-view-more-text';
   
@@ -41,7 +44,8 @@ npm install --save react-native-view-more-text
         <ViewMoreText
           numberOfLines={3}
           renderViewMore={this.renderViewMore}
-          renderViewLess={this.renderViewLess}>
+          renderViewLess={this.renderViewLess}
+          textStyle={{textAlign: 'center'}}>
           <Text>
             Lorem ipsum dolor sit amet, in quo dolorum ponderum, nam veri molestie constituto eu. Eum enim tantas sadipscing ne, ut omnes malorum nostrum cum. Errem populo qui ne, ea ipsum antiopam definitionem eos.
           </Text>
