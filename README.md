@@ -22,8 +22,8 @@ npm install --save react-native-view-more-text
 - **afterCollapse**: Callback after collapsing
 - **afterExpand**: Callback after expanding
 
-- **textStyle**: Style is passed to <Text> inside <ViewMoreText>
-(Refer to this PR #8)
+- **textStyle**: Style is passed to `Text` inside `ViewMoreText`
+(Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
 ```javascript
   import ViewMoreText from 'react-native-view-more-text';
