@@ -21,10 +21,11 @@
   ],
   "author": "nlt2390",
   "dependencies": {
-    "prop-types": "^15.0.0"
+    "prop-types": "^15.5.7"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "prop-types": "*"
   }
 }
