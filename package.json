@@ -1,6 +1,6 @@
 {
   "name": "react-native-view-more-text",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Expand/Collapse long text.",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,6 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "prop-types": "*"
+    "prop-types": "^15.5.7"
   }
 }
