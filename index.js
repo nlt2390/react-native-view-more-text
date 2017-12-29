@@ -10,9 +10,17 @@ class ViewMoreText extends React.Component {
     this.state = {
       numberOfLines: null,
       opacity: 0,
+      shouldRender: false,
     };
   }
 
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({
+        shouldRender: true,
+      });
+    }, this.props.renderTimeout);
+  }
 
   componentWillReceiveProps() {
     this.resetData();
@@ -111,23 +119,26 @@ class ViewMoreText extends React.Component {
   }
 
   render() {
-    return (
-      <View onLayout={this.onLayout} style={{ opacity: this.state.opacity }}>
-        <Text
-          style={this.props.textStyle}
-          numberOfLines={this.state.numberOfLines}
-        >
-          {this.props.children}
-        </Text>
-        {this.renderFooter()}
+    if (this.state.shouldRender) {
+      return (
+        <View onLayout={this.onLayout} style={{ opacity: this.state.opacity }}>
+          <Text
+            style={this.props.textStyle}
+            numberOfLines={this.state.numberOfLines}
+          >
+            {this.props.children}
+          </Text>
+          {this.renderFooter()}
 
-        {
-          this.state.numberOfLines &&
-          <View style={{ width: 1, height: 1 }} />
-        }
+          {
+            this.state.numberOfLines &&
+            <View style={{ width: 1, height: 1 }} />
+          }
 
-      </View>
-    );
+        </View>
+      );
+    }
+    return null;
   }
 }
 
@@ -137,13 +148,15 @@ ViewMoreText.propTypes = {
   afterCollapse: PropTypes.func,
   afterExpand: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
-  textStyle: Text.propTypes.style,
+  textStyle: PropTypes.object,
+  renderTimeout: PropTypes.number,
 };
 
 ViewMoreText.defaultProps = {
   afterCollapse: () => {},
   afterExpand: () => {},
-  textStyle: {}
+  textStyle: {},
+  renderTimeout: 0,
 };
 
 export default ViewMoreText;

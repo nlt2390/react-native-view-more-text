@@ -16,14 +16,16 @@ npm install --save react-native-view-more-text
 
 ### Usage
 
-- **numberOfLines**(required): Number of lines to be displayed.
-- **renderViewMore**: Render view-more component 
-- **renderViewLess**: Render view-less component 
-- **afterCollapse**: Callback after collapsing
-- **afterExpand**: Callback after expanding
+- **numberOfLines**(number)(*required): Number of lines to be displayed.
+- **renderViewMore**(object): Render view-more component 
+- **renderViewLess**(object): Render view-less component 
+- **afterCollapse**(func): Callback after collapsing
+- **afterExpand**(func): Callback after expanding
 
-- **textStyle**: Style is passed to `Text` inside `ViewMoreText`
+- **textStyle**(object): Style is passed to `Text` inside `ViewMoreText`
 (Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
+
+- **renderTimeout**(number): Timeout before rendering. Issue [#11](#11)
 
 ```javascript
   import ViewMoreText from 'react-native-view-more-text';
@@ -45,7 +47,9 @@ npm install --save react-native-view-more-text
           numberOfLines={3}
           renderViewMore={this.renderViewMore}
           renderViewLess={this.renderViewLess}
-          textStyle={{textAlign: 'center'}}>
+          textStyle={{textAlign: 'center'}}
+          renderTimeout={100}
+        >
           <Text>
             Lorem ipsum dolor sit amet, in quo dolorum ponderum, nam veri molestie constituto eu. Eum enim tantas sadipscing ne, ut omnes malorum nostrum cum. Errem populo qui ne, ea ipsum antiopam definitionem eos.
           </Text>
