@@ -59,3 +59,11 @@ npm install --save react-native-view-more-text
   })
 
 ```
+
+#### Donation
+
+Help to make cryptocurrency world bigger :))
+
+My [ADA](https://www.cardanohub.org/en/home/) wallet: 
+
+DdzFFzCqrht7vQmuSYrjn6PKDxW3on4cFznU4Jjjycp1bqVTvXngM8wN7sop1Haq7msc5NanULU8TyAG9UuLLZMynfroiHKr2aiiTaMM
