@@ -148,7 +148,7 @@ ViewMoreText.propTypes = {
   afterCollapse: PropTypes.func,
   afterExpand: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
-  textStyle: PropTypes.object,
+  textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
   renderTimeout: PropTypes.number,
 };
 
