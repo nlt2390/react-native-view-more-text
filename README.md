@@ -22,7 +22,7 @@ npm install --save react-native-view-more-text
 - **afterCollapse**(func): Callback after collapsing
 - **afterExpand**(func): Callback after expanding
 
-- **textStyle**(object): Style is passed to `Text` inside `ViewMoreText`
+- **textStyle**([object, array]): Styles is passed to `Text` inside `ViewMoreText`
 (Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
 - **renderTimeout**(number): Timeout before rendering. Issue [#11](https://github.com/nlt2390/react-native-view-more-text/issues/11)
