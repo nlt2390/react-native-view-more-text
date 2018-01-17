@@ -1,6 +1,6 @@
 {
   "name": "react-native-view-more-text",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Expand/Collapse long text.",
   "main": "index.js",
   "scripts": {
