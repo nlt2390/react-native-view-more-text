@@ -13,13 +13,26 @@ class ViewMoreText extends React.Component {
     };
   }
 
-  componentWillReceiveProps() {
-    this.resetData();
+  componentWillReceiveProps(nextProps) {
+    const numberOfLinesChanged = this.props.numberOfLines !== nextProps.numberOfLines;
+    let textHasChanged = true;
 
-    this.setState({
-      numberOfLines: null,
-      opacity: 0,
-    });
+    if(this.props.children && this.props.children.props.children &&
+        nextProps.children &&  nextProps.children.props.children){
+      if(this.props.children.props.children === nextProps.children.props.children){
+        textHasChanged = false;
+      }
+    }
+
+    // call resetData only when the numberOfLines or the text content has changed
+    if(numberOfLinesChanged || textHasChanged){
+      this.resetData();
+
+      this.setState({
+        numberOfLines: null,
+        opacity: 0,
+      });
+    }
   }
 
   componentDidUpdate() {
