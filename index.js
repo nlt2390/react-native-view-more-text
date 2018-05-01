@@ -10,6 +10,7 @@ class ViewMoreText extends React.Component {
     this.state = {
       numberOfLines: null,
       opacity: 0,
+      isRendering: true,
     };
   }
 
@@ -19,6 +20,7 @@ class ViewMoreText extends React.Component {
     this.setState({
       numberOfLines: null,
       opacity: 0,
+      isRendering: true,
     });
   }
 
@@ -35,16 +37,16 @@ class ViewMoreText extends React.Component {
       height,
     } = event.nativeEvent.layout;
 
-    if (height === 0 || this.state.opacity === 1) return false;
+    if (height === 0 || !this.state.isRendering) return false;
 
     this.setOriginalHeight(height);
     this.checkTextTruncated(height);
     if (this.state.numberOfLines === this.props.numberOfLines) {
       setTimeout(() => {
         this.setState({
-          opacity: 1,
+          isRendering: false,
         });
-      }, 100);
+      }, 200);
     }
     return null;
   }
@@ -89,14 +91,24 @@ class ViewMoreText extends React.Component {
       opacity: this.state.opacity,
     };
 
-    const isRendering = this.state.opacity === 0;
-
     Object.assign(
       style,
-      isRendering ? { position: 'absolute', top: 0, left: 0 } : null,
+      this.state.isRendering ? { position: 'absolute', top: 0, left: 0 } : null,
     );
 
+    this.removeOpacityAfterRendering();
+
     return style;
+  }
+
+  removeOpacityAfterRendering = () => {
+    if (!this.state.isRendering) {
+      setTimeout(() => {
+        this.setState({
+          opacity: 1,
+        });
+      }, 100);
+    }
   }
 
   renderViewMore = () => (
