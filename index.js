@@ -94,7 +94,7 @@ class ViewMoreText extends React.Component {
 
     Object.assign(
       style,
-      this.state.isRendering ? { position: 'absolute', top: 0, left: 0 } : null,
+      this.state.isRendering ? { position: 'relative', top: 0, right: 0, bottom: 0, left:0 } : null,
     );
 
     this.removeOpacityAfterRendering();
@@ -108,7 +108,7 @@ class ViewMoreText extends React.Component {
         this.setState({
           opacity: 1,
         });
-      }, 100);
+      }, 10);
     }
   }
 
