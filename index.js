@@ -88,6 +88,7 @@ class ViewMoreText extends React.Component {
 
   getWrapperStyle = () => {
     const style = {
+      ...this.props.containerStyle,
       opacity: this.state.opacity,
     };
 
@@ -166,6 +167,7 @@ ViewMoreText.propTypes = {
   afterExpand: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
   textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 ViewMoreText.defaultProps = {
