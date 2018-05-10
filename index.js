@@ -88,12 +88,13 @@ class ViewMoreText extends React.Component {
 
   getWrapperStyle = () => {
     const style = {
+      ...this.props.containerStyle,
       opacity: this.state.opacity,
     };
 
     Object.assign(
       style,
-      this.state.isRendering ? { position: 'absolute', top: 0, left: 0 } : null,
+      this.state.isRendering ? { position: 'relative', top: 0, right: 0, bottom: 0, left:0 } : null,
     );
 
     this.removeOpacityAfterRendering();
@@ -107,7 +108,7 @@ class ViewMoreText extends React.Component {
         this.setState({
           opacity: 1,
         });
-      }, 100);
+      }, 10);
     }
   }
 
@@ -166,6 +167,7 @@ ViewMoreText.propTypes = {
   afterExpand: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
   textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 ViewMoreText.defaultProps = {
