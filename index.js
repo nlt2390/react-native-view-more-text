@@ -1,124 +1,100 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
+const styles = StyleSheet.create({
+  fullTextWrapper: {
+    opacity: 0,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+  },
+  viewMoreText: {
+    color: 'blue',
+  },
+  transparent: {
+    opacity: 0,
+  },
+});
+
 class ViewMoreText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.resetData();
+  trimmedTextHeight = null;
+  fullTextHeight = null;
+  shouldShowMore = false;
 
-    this.state = {
-      numberOfLines: null,
-      opacity: 0,
-      isRendering: true,
-    };
+  state = {
+    isFulltextShown: true,
+    numberOfLines: this.props.numberOfLines,
   }
 
-  componentWillReceiveProps() {
-    this.resetData();
-
-    this.setState({
-      numberOfLines: null,
-      opacity: 0,
-      isRendering: true,
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.state.numberOfLines === null) {
-      this.props.afterExpand();
-    } else {
-      this.props.afterCollapse();
+  hideFullText = () => {
+    if (
+      this.state.isFulltextShown &&
+      this.trimmedTextHeight &&
+      this.fullTextHeight
+    ) {
+      this.shouldShowMore = this.trimmedTextHeight < this.fullTextHeight;
+      this.setState({
+        isFulltextShown: false,
+      });
     }
   }
 
-  onLayout = (event) => {
+  onLayoutTrimmedText = (event) => {
     const {
       height,
     } = event.nativeEvent.layout;
 
-    if (height === 0 || !this.state.isRendering) return false;
+    this.trimmedTextHeight = height;
+    this.hideFullText();
+  }
 
-    this.setOriginalHeight(height);
-    this.checkTextTruncated(height);
-    if (this.state.numberOfLines === this.props.numberOfLines) {
-      setTimeout(() => {
-        this.setState({
-          isRendering: false,
-        });
-      }, 200);
-    }
-    return null;
+  onLayoutFullText = (event) => {
+    const {
+      height,
+    } = event.nativeEvent.layout;
+
+    this.fullTextHeight = height;
+    this.hideFullText();
   }
 
   onPressMore = () => {
     this.setState({
       numberOfLines: null,
+    }, () => {
+      this.props.afterExpand();
     });
   }
 
   onPressLess = () => {
     this.setState({
       numberOfLines: this.props.numberOfLines,
+    }, () => {
+      this.props.afterCollapse();
     });
   }
 
-  setOriginalHeight = (height) => {
-    if (this.originalHeight === 0) {
-      this.originalHeight = height;
-
-      this.setState({
-        numberOfLines: this.props.numberOfLines,
-      });
-    }
-  }
-
-  resetData = () => {
-    this.isTruncated = false;
-    this.originalHeight = 0;
-    this.shouldShowMore = false;
-    this.isInit = false;
-  }
-
-  checkTextTruncated = (height) => {
-    if (height < this.originalHeight) {
-      this.shouldShowMore = true;
-    }
-  }
-
   getWrapperStyle = () => {
-    const style = {
-      opacity: this.state.opacity,
-    };
-
-    Object.assign(
-      style,
-      this.state.isRendering ? { position: 'absolute', top: 0, left: 0 } : null,
-    );
-
-    this.removeOpacityAfterRendering();
-
-    return style;
-  }
-
-  removeOpacityAfterRendering = () => {
-    if (!this.state.isRendering) {
-      setTimeout(() => {
-        this.setState({
-          opacity: 1,
-        });
-      }, 100);
+    if (this.state.isFulltextShown) {
+      return styles.transparent;
     }
+    return {};
   }
 
   renderViewMore = () => (
-    <Text onPress={this.onPressMore}>
+    <Text
+      style={styles.viewMoreText}
+      onPress={this.onPressMore}
+    >
       View More
     </Text>
   )
 
   renderViewLess = () => (
-    <Text onPress={this.onPressLess}>
+    <Text
+      style={styles.viewMoreText}
+      onPress={this.onPressLess}
+    >
       View Less
     </Text>
   )
@@ -137,10 +113,21 @@ class ViewMoreText extends React.Component {
     return null;
   }
 
+  renderFullText = () => {
+    if (this.state.isFulltextShown) {
+      return (
+        <View onLayout={this.onLayoutFullText} style={styles.fullTextWrapper}>
+          <Text>{this.props.children}</Text>
+        </View>
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
-      <View>
-        <View onLayout={this.onLayout} style={this.getWrapperStyle()}>
+      <View style={this.getWrapperStyle()}>
+        <View onLayout={this.onLayoutTrimmedText}>
           <Text
             style={this.props.textStyle}
             numberOfLines={this.state.numberOfLines}
@@ -148,12 +135,9 @@ class ViewMoreText extends React.Component {
             {this.props.children}
           </Text>
           {this.renderFooter()}
-
-          {
-            this.state.numberOfLines &&
-            <View style={{ width: 1, height: 1 }} />
-          }
         </View>
+
+        {this.renderFullText()}
       </View>
     );
   }
