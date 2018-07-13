@@ -117,7 +117,7 @@ class ViewMoreText extends React.Component {
     if (this.state.isFulltextShown) {
       return (
         <View onLayout={this.onLayoutFullText} style={styles.fullTextWrapper}>
-          <Text>{this.props.children}</Text>
+          <Text style={this.props.textStyle}>{this.props.children}</Text>
         </View>
       );
     }
