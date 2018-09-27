@@ -114,10 +114,17 @@ class ViewMoreText extends React.Component {
   }
 
   renderFullText = () => {
+    const { textStyle, onTextPress, onTextLongPress } = this.props;
     if (this.state.isFulltextShown) {
       return (
         <View onLayout={this.onLayoutFullText} style={styles.fullTextWrapper}>
-          <Text style={this.props.textStyle}>{this.props.children}</Text>
+          <Text
+            style={textStyle}
+            onPress={onTextPress}
+            onLongPress={onTextLongPress}
+          >
+            {this.props.children}
+          </Text>
         </View>
       );
     }
@@ -125,12 +132,15 @@ class ViewMoreText extends React.Component {
   }
 
   render() {
+    const { textStyle, onTextPress, onTextLongPress } = this.props;
     return (
       <View style={this.getWrapperStyle()}>
         <View onLayout={this.onLayoutTrimmedText}>
           <Text
-            style={this.props.textStyle}
+            style={textStyle}
             numberOfLines={this.state.numberOfLines}
+            onPress={onTextPress}
+            onLongPress={onTextLongPress}
           >
             {this.props.children}
           </Text>
@@ -148,6 +158,8 @@ ViewMoreText.propTypes = {
   renderViewLess: PropTypes.func,
   afterCollapse: PropTypes.func,
   afterExpand: PropTypes.func,
+  onTextPress: PropTypes.func,
+  onTextLongPress: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
   textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
@@ -155,6 +167,8 @@ ViewMoreText.propTypes = {
 ViewMoreText.defaultProps = {
   afterCollapse: () => {},
   afterExpand: () => {},
+  onTextPress: () => {},
+  onTextLongPress: () => {},
   textStyle: {},
 };
 
