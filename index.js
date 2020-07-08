@@ -83,19 +83,19 @@ class ViewMoreText extends React.Component {
 
   renderViewMore = () => (
     <Text
-      style={styles.viewMoreText}
+      style={this.props.viewMoreStyle}
       onPress={this.onPressMore}
     >
-      View More
+      {this.props.viewMoreText}
     </Text>
   )
 
   renderViewLess = () => (
     <Text
-      style={styles.viewMoreText}
+      style={this.props.viewLessStyle}
       onPress={this.onPressLess}
     >
-      View Less
+      {this.props.viewLessText}
     </Text>
   )
 
@@ -150,12 +150,20 @@ ViewMoreText.propTypes = {
   afterExpand: PropTypes.func,
   numberOfLines: PropTypes.number.isRequired,
   textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  viewMoreStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  viewLessStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  viewMoreText: PropTypes.string,
+  viewLessText: PropTypes.string,
 };
 
 ViewMoreText.defaultProps = {
   afterCollapse: () => {},
   afterExpand: () => {},
   textStyle: {},
+  viewMoreStyle: styles.viewMoreText,
+  viewLessStyle: styles.viewMoreText,
+  viewMoreText: "View More",
+  viewLessText: "View Less",
 };
 
 export default ViewMoreText;

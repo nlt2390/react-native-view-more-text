@@ -25,6 +25,14 @@ npm install --save react-native-view-more-text
 - **textStyle**([object, array]): Styles is passed to `Text` inside `ViewMoreText`
 (Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
+
+- **viewMoreStyle**([object, array]): Style is passed to "View More" text
+- **viewLessStyle**([object, array]): Style is passed to "View Less" text
+- **viewMoreText**(String): String that raplaces "View More" text
+- **viewLessText**(String): String that raplaces "View Less" text
+
+**Example 1**
+
 ```javascript
   import ViewMoreText from 'react-native-view-more-text';
   
@@ -54,6 +62,32 @@ npm install --save react-native-view-more-text
       )
     }
   })
+
+```
+
+**Example 2:**
+
+```javascript
+  import ViewMoreText from 'react-native-view-more-text';
+  
+  export default function Example() {
+ 
+      return(
+        <ViewMoreText
+          numberOfLines={3}
+          viewMoreStyle={{textAlign: 'right'}}
+          viewLessStyle={{textAlign: 'right'}}
+          viewMoreText="Show more..."
+          viewLessText="Hide"
+          textStyle={{textAlign: 'center'}}
+        >
+          <Text>
+            Lorem ipsum dolor sit amet, in quo dolorum ponderum, nam veri molestie constituto eu. Eum enim tantas sadipscing ne, ut omnes malorum nostrum cum. Errem populo qui ne, ea ipsum antiopam definitionem eos.
+          </Text>
+        </ViewMoreText>
+      )
+   }
+  }
 
 ```
 
