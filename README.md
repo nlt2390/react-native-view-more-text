@@ -56,11 +56,3 @@ npm install --save react-native-view-more-text
   })
 
 ```
-
-#### Donation
-<img src="https://www.cardanohub.org/wp-content/uploads/2017/07/cardano-symbol-150x150.png" width="70"/>
-Help to make cryptocurrency world bigger :))
-
-My <a href="https://www.cardanohub.org/en/home/" target="_blank">ADA</a> wallet: 
-
-DdzFFzCqrht7vQmuSYrjn6PKDxW3on4cFznU4Jjjycp1bqVTvXngM8wN7sop1Haq7msc5NanULU8TyAG9UuLLZMynfroiHKr2aiiTaMM
