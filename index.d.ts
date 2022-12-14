@@ -7,8 +7,9 @@ declare module 'react-native-view-more-text' {
     numberOfLines: number;
     renderViewMore?: (handlePress: () => void) => JSX.Element;
     renderViewLess?: (handlePress: () => void) => JSX.Element;
-    afterCollapse?: () => void
-    afterExpand?: () => void
+    afterCollapse?: () => void;
+    afterExpand?: () => void;
+    onTextLayout?: () => void;
     textStyle?: StyleProp<TextStyle>;
   }
   
