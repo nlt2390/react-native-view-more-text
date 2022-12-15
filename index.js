@@ -130,6 +130,7 @@ class ViewMoreText extends React.Component {
         <View onLayout={this.onLayoutTrimmedText}>
           <Text
             style={this.props.textStyle}
+            onTextLayout={this.props.onTextLayout}
             numberOfLines={this.state.numberOfLines}
           >
             {this.props.children}
@@ -144,6 +145,7 @@ class ViewMoreText extends React.Component {
 }
 
 ViewMoreText.propTypes = {
+  onTextLayout: PropTypes.func,
   renderViewMore: PropTypes.func,
   renderViewLess: PropTypes.func,
   afterCollapse: PropTypes.func,

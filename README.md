@@ -22,6 +22,8 @@ npm install --save react-native-view-more-text
 - **afterCollapse**(func): Callback after collapsing
 - **afterExpand**(func): Callback after expanding
 
+- **onTextLayout**(func): onTextLayout function is passed to `Text` inside `ViewMoreText`
+(Refer to this [PR#56](https://github.com/nlt2390/react-native-view-more-text/pull/56))
 - **textStyle**([object, array]): Styles is passed to `Text` inside `ViewMoreText`
 (Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
