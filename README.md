@@ -28,7 +28,6 @@ npm install --save react-native-view-more-text || yarn add react-native-view-mor
 (Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
 ```jsx
-  ...redacted
   import ViewMoreText from 'react-native-view-more-text';
 
   const Screen = () => {
