@@ -10,7 +10,7 @@ Working on IOS/Android
 ### Installation
 
 ```
-npm install --save react-native-view-more-text 
+npm install --save react-native-view-more-text || yarn add react-native-view-more-text
 
 ```
 
@@ -27,34 +27,27 @@ npm install --save react-native-view-more-text
 - **textStyle**([object, array]): Styles is passed to `Text` inside `ViewMoreText`
 (Refer to this [PR#8](https://github.com/nlt2390/react-native-view-more-text/pull/8))
 
-```javascript
+```jsx
+  ...redacted
   import ViewMoreText from 'react-native-view-more-text';
-  
-  let Example = React.createClass({
-    renderViewMore(onPress){
-      return(
-        <Text onPress={onPress}>View more</Text>
-      )
-    },
-    renderViewLess(onPress){
-      return(
-        <Text onPress={onPress}>View less</Text>
-      )
-    },
-    render(){
-      return(
+
+  const Screen = () => {
+    const renderViewMore = (onPress) =>  <Text onPress={onPress}>View more</Text>;
+    const renderViewLess = (onPress) =>  <Text onPress={onPress}>View less</Text>;
+
+    return (
+       //...  
         <ViewMoreText
           numberOfLines={3}
-          renderViewMore={this.renderViewMore}
-          renderViewLess={this.renderViewLess}
+          renderViewMore={renderViewMore}
+          renderViewLess={renderViewLess}
           textStyle={{textAlign: 'center'}}
         >
           <Text>
             Lorem ipsum dolor sit amet, in quo dolorum ponderum, nam veri molestie constituto eu. Eum enim tantas sadipscing ne, ut omnes malorum nostrum cum. Errem populo qui ne, ea ipsum antiopam definitionem eos.
           </Text>
         </ViewMoreText>
-      )
-    }
-  })
-
+        //... 
+    );
+  }
 ```
