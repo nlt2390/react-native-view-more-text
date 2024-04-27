@@ -50,3 +50,6 @@ npm install --save react-native-view-more-text || yarn add react-native-view-mor
     );
   }
 ```
+
+### Support
+Discord: [lelabrador/react-native-view-more-text](https://discord.com/channels/1233795861582975026/1233795861582975029)
